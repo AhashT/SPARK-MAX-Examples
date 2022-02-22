@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -16,10 +16,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Robot extends TimedRobot {
   private DifferentialDrive m_myRobot;
-  private Joystick m_leftStick;
-  private Joystick m_rightStick;
+  private XboxController m_leftStick;
+  private XboxController m_rightStick;
   private static final int leftDeviceID = 1; 
-  private static final int rightDeviceID = 2;
+  private static final int rightDeviceID = 3;
   private CANSparkMax m_leftMotor;
   private CANSparkMax m_rightMotor;
 
@@ -51,12 +51,12 @@ public class Robot extends TimedRobot {
 
     m_myRobot = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
-    m_leftStick = new Joystick(0);
-    m_rightStick = new Joystick(1);
+    m_leftStick = new XboxController(0);
+    m_rightStick = new XboxController(1);
   }
 
   @Override
   public void teleopPeriodic() {
-    m_myRobot.tankDrive(m_leftStick.getY(), m_rightStick.getY());
+    m_myRobot.tankDrive(m_leftStick.getLeftY(), m_rightStick.getRightY());
   }
 }
