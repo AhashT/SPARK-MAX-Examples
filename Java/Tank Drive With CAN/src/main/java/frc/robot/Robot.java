@@ -16,12 +16,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Robot extends TimedRobot {
   private DifferentialDrive m_myRobot;
-  private XboxController m_leftStick;
-  private XboxController m_rightStick;
   private static final int leftDeviceID = 1; 
   private static final int rightDeviceID = 3;
   private CANSparkMax m_leftMotor;
   private CANSparkMax m_rightMotor;
+  XboxController xbox;
 
   @Override
   public void robotInit() {
@@ -51,12 +50,12 @@ public class Robot extends TimedRobot {
 
     m_myRobot = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
-    m_leftStick = new XboxController(0);
-    m_rightStick = new XboxController(1);
+     xbox = new XboxController(0);
+
   }
 
   @Override
   public void teleopPeriodic() {
-    m_myRobot.tankDrive(m_leftStick.getLeftY(), m_rightStick.getRightY());
+    m_myRobot.tankDrive(xbox.getLeftY(), xbox.getRightY() * -1.0);
   }
 }
